@@ -12,5 +12,12 @@ namespace Cloudinary
         public string ApiKey { get; set; }
 
         public string ApiSecret { get; set; }
+
+        public AccountConfiguration(string cloudName, string apiKey, string apiSecret)
+        {
+            CloudName = cloudName;
+            ApiKey = apiKey;
+            ApiSecret = apiSecret;
+        }
     }
 }
