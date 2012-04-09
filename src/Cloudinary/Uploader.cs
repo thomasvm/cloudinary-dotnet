@@ -37,8 +37,9 @@ namespace Cloudinary
             }
 
             paramString = paramString + "--" + BOUNDARY + LINE
-                + "Content-Disposition: form-data; " + LINE
-                + "Content-Type: image/jpeg" + LINE + LINE;
+                          + "Content-Disposition: form-data; " + LINE
+                          // + "Content-Type: image/jpeg" + LINE 
+                          + LINE;
 
             string closing_string = LINE + "--" + BOUNDARY + "--";
 
@@ -62,7 +63,8 @@ namespace Cloudinary
             wc.Headers.Add("MIME-version", "1.0");
 
             // upload
-            byte[] response = wc.UploadData("http://api.cloudinary.com/v1_1/demo/image/upload", "POST", finalBytes);
+            string url = string.Format("http://api.cloudinary.com/v1_1/{0}/image/upload", Configuration.CloudName);
+            byte[] response = wc.UploadData(url, "POST", finalBytes);
 
             string result = Encoding.Default.GetString(response);
 
