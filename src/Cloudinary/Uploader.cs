@@ -38,7 +38,6 @@ namespace Cloudinary
 
             paramString = paramString + "--" + BOUNDARY + LINE
                           + "Content-Disposition: form-data; " + LINE
-                          // + "Content-Type: image/jpeg" + LINE 
                           + LINE;
 
             string closing_string = LINE + "--" + BOUNDARY + "--";
@@ -58,17 +57,14 @@ namespace Cloudinary
             byte[] finalBytes = byteList.ToArray();
 
             // create request
-            WebClient wc = new WebClient();
-            wc.Headers.Set("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
-            wc.Headers.Add("MIME-version", "1.0");
-
-            // upload
             string url = string.Format("http://api.cloudinary.com/v1_1/{0}/image/upload", Configuration.CloudName);
-            byte[] response = wc.UploadData(url, "POST", finalBytes);
 
-            string result = Encoding.Default.GetString(response);
+            var wc = new WebClient();
+            byte[] result = wc.UploadData(url, "POST", finalBytes);
 
-            Console.WriteLine(result);
+            string answer = Encoding.Default.GetString(result);
+
+            Console.WriteLine(answer);
         }
 
         private static byte[] ReadFully(Stream input)
@@ -96,22 +92,18 @@ namespace Cloudinary
         {
             var list = new List<Parameter>(parameters)
                            {
-                               new Parameter("timestamp", UnixTimeInSeconds(DateTime.UtcNow)),
+                               new Parameter("timestamp", UnixTimeInSeconds(DateTime.Now)),
                                new Parameter("api_key", Configuration.ApiKey)
                            };
             list.Sort();
 
-            StringBuilder values = new StringBuilder();
-
-            foreach (Parameter param in list)
-                values.Append(param.ToString());
-
-            values.Append(Configuration.ApiSecret);
-
-            byte[] sha1Result = SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(values.ToString()));
+            var combined = string.Join("&", list.Select(p => p.ToString()).ToArray());
+            combined += Configuration.ApiSecret;
+            
+            byte[] sha1Result = SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(combined));
 
             StringBuilder signatureBuilder = new StringBuilder();
-
+            
             foreach (byte b in sha1Result)
                 signatureBuilder.Append(b.ToString("x2"));
 
