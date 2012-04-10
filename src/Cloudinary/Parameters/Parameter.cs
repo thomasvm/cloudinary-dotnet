@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 
-namespace Cloudinary
+namespace Cloudinary.Parameters
 {
     internal class Parameter : IComparable
     {
+        protected internal const string BOUNDARY = "SoMeTeXtWeWiLlNeVeRsEe";
+        protected const string LINE = "\r\n";
+
         private object _value;
 
         public string Name { get; private set; }
@@ -17,9 +19,14 @@ namespace Cloudinary
             {
                 if (_value is Array)
                     return ConvertArrayToString(_value as Array);
-                else
-                    return _value.ToString();
+
+                return _value.ToString();
             }
+        }
+
+        protected Parameter(string name)
+        {
+            Name = name;
         }
 
         public Parameter(string name, object value)
@@ -31,6 +38,12 @@ namespace Cloudinary
         public override string ToString()
         {
             return string.Format("{0}={1}", Name, Value);
+        }
+
+        public virtual void WriteTo(StreamWriter writer)
+        {
+            writer.Write("--" + BOUNDARY + LINE);
+            writer.Write("Content-Disposition: form-data; name=\"" + Name + "\"" + LINE + LINE + Value + LINE);
         }
 
         public int CompareTo(object obj)
