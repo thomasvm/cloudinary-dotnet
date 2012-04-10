@@ -8,12 +8,15 @@ namespace Cloudinary
 {
     public class UploadInformation
     {
-        public Stream InputStream { get; set; }
+        public Stream InputStream { get; private set; }
+
+        public string Filename { get; private set; }
 
         public string PublicId { get; set; }
 
-        public UploadInformation(Stream inputStream)
+        public UploadInformation(string filename, Stream inputStream)
         {
+            Filename = filename;
             InputStream = inputStream;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -44,9 +45,17 @@ namespace Cloudinary.CommandLine
 
             using(var stream =new FileStream(filename, FileMode.Open))
             {
-                uploader.Upload(new UploadInformation(stream));
+                uploader.Upload(new UploadInformation(filename, stream)
+                                    {
+                                        PublicId = filename
+                                    });
             }
             Console.WriteLine("Successfully uploaded file");
+
+            uploader.Destroy(filename);
+
+            if(Debugger.IsAttached)
+                Console.ReadLine();
         }
     }
 }

@@ -37,30 +37,57 @@ namespace Cloudinary
             }
 
             paramString = paramString + "--" + BOUNDARY + LINE
-                          + "Content-Disposition: form-data; " + LINE
+                          + "Content-Disposition: form-data;  name=\"file\"; filename=\"" + upload.Filename + "\""+ LINE
+                          + "Content-Type: application/octet-stream" + LINE
                           + LINE;
 
-            string closing_string = LINE + "--" + BOUNDARY + "--";
+            string closingString = LINE + "--" + BOUNDARY + "--";
 
             // get bytes
             byte[] paramBytes = Encoding.Default.GetBytes(paramString);
-            byte[] closingBytes = Encoding.Default.GetBytes(closing_string);
+            byte[] closingBytes = Encoding.Default.GetBytes(closingString);
 
             byte[] fileBytes = ReadFully(upload.InputStream);
 
             // compose
-            List<byte> byteList = new List<byte>(paramBytes.Length + fileBytes.Length + closingBytes.Length);
-            byteList.AddRange(paramBytes);
-            byteList.AddRange(fileBytes);
-            byteList.AddRange(closingBytes);
-
-            byte[] finalBytes = byteList.ToArray();
+            byte[] finalBytes = paramBytes.Concat(fileBytes).Concat(closingBytes).ToArray();
 
             // create request
             string url = string.Format("http://api.cloudinary.com/v1_1/{0}/image/upload", Configuration.CloudName);
 
             var wc = new WebClient();
+            wc.Headers.Set("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
             byte[] result = wc.UploadData(url, "POST", finalBytes);
+
+            string answer = Encoding.Default.GetString(result);
+
+            Console.WriteLine(answer);
+        }
+
+        public void Destroy(string publicId)
+        {
+            string url = string.Format("http://api.cloudinary.com/v1_1/{0}/image/destroy", Configuration.CloudName);
+
+            var parameters = new List<Parameter>
+                                 {
+                                     new Parameter("public_id", publicId)
+                                 };
+
+            var finalParameters = Sign(parameters);
+            string paramString = string.Empty;
+
+            foreach (Parameter param in finalParameters)
+            {
+                paramString += "--" + BOUNDARY + LINE;
+                paramString += "Content-Disposition: form-data; name=\"" + param.Name + "\"" + LINE + LINE + param.Value + LINE;
+            }
+
+            paramString += "--" + BOUNDARY + "--";
+            byte[] paramBytes = Encoding.Default.GetBytes(paramString);
+
+            var wc = new WebClient();
+            wc.Headers.Set("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+            byte[] result = wc.UploadData(url, "POST", paramBytes);
 
             string answer = Encoding.Default.GetString(result);
 
@@ -88,12 +115,11 @@ namespace Cloudinary
             return Convert.ToInt64(timeSinceEpoch.TotalSeconds);
         }
 
-        internal Parameter[] Sign(params Parameter[] parameters)
+        internal Parameter[] Sign(IEnumerable<Parameter> parameters)
         {
             var list = new List<Parameter>(parameters)
                            {
                                new Parameter("timestamp", UnixTimeInSeconds(DateTime.Now)),
-                               new Parameter("api_key", Configuration.ApiKey)
                            };
             list.Sort();
 
@@ -108,7 +134,8 @@ namespace Cloudinary
                 signatureBuilder.Append(b.ToString("x2"));
 
             list.Add(new Parameter("signature", signatureBuilder.ToString()));
-
+            list.Add(new Parameter("api_key", Configuration.ApiKey));
+            
             return list.ToArray();
         }
     }
