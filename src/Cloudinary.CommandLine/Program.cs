@@ -47,10 +47,23 @@ namespace Cloudinary.CommandLine
 
             using(var stream =new FileStream(filename, FileMode.Open))
             {
-                uploader.Upload(new UploadInformation(filename, stream)
+                var uploadResult = uploader.Upload(new UploadInformation(filename, stream)
                                     {
-                                        PublicId = publicId
+                                        PublicId = publicId,
+                                        Format = "png",
+                                        Transformation = new Transformation(120, 120)
+                                                             {
+                                                                 Crop = CropMode.Scale
+                                                             },
+                                        Eager = new[]
+                                                    {
+                                                        new Transformation(240, 240),
+                                                        new Transformation(120, 360) { Crop = CropMode.Limit },
+                                                    }
                                     });
+
+                Console.WriteLine("Version: {0}, PublicId {1}", uploadResult.Version, uploadResult.PublicId);
+                Console.WriteLine("Url: {0}", uploadResult.Url);
             }
             Console.WriteLine("Successfully uploaded file");
 

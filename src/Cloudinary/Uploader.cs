@@ -24,11 +24,8 @@ namespace Cloudinary
 
         public UploadResult Upload(UploadInformation upload)
         {
-            var parameterList = new List<Parameter>();
+            var parameterList = upload.GetParameters().ToList();
 
-            if(!string.IsNullOrEmpty(upload.PublicId))
-                parameterList.Add(new Parameter("public_id", upload.PublicId));
-            
             Sign(parameterList);
             parameterList.Add(new FileParameter("file", upload.Filename, upload.InputStream));
             

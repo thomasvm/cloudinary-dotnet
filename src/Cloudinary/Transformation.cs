@@ -19,5 +19,16 @@ namespace Cloudinary
             Height = height;
             Crop = null;
         }
+
+        public string ToCloudinary()
+        {
+            var cli = new StringBuilder();
+            cli.AppendFormat("w_{0},h_{1}", Width, Height);
+
+            if (Crop.HasValue)
+                cli.AppendFormat(",c_{0}", Crop.Value.ToString().ToLowerInvariant());
+
+            return cli.ToString();
+        }
     }
 }

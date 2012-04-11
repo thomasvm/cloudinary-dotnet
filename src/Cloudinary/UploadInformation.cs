@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Cloudinary.Parameters;
 
 namespace Cloudinary
 {
@@ -26,6 +27,43 @@ namespace Cloudinary
         {
             Filename = filename;
             InputStream = inputStream;
+        }
+
+        internal IEnumerable<Parameter> GetParameters()
+        {
+            var parameterNames = new Dictionary<string, Func<string>>
+                                     {
+                                         { "public_id", () => PublicId },
+                                         { "format", () => Format },
+                                         { "transformation", () => GetTransformationValue() },
+                                         { "tags", () => Tags },
+                                         { "eager", () => GetEagerTransformationValues() }
+                                     };
+            
+            foreach(var keyValue in parameterNames)
+            {
+                string result = keyValue.Value();
+
+                if (string.IsNullOrEmpty(result))
+                    continue;
+
+                yield return new Parameter(keyValue.Key, result);
+            }
+        }
+
+        public string GetTransformationValue()
+        {
+            return Transformation != null
+                       ? Transformation.ToCloudinary()
+                       : string.Empty;
+        }
+
+        public string GetEagerTransformationValues()
+        {
+            if (Eager == null)
+                return null;
+
+            return string.Join("|", Eager.Select(e => e.ToCloudinary()).ToArray());
         }
     }
 }
