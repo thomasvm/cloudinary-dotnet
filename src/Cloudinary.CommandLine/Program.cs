@@ -43,16 +43,18 @@ namespace Cloudinary.CommandLine
 
             var uploader = new Uploader(configuration);
 
+            string publicId = Path.GetFileNameWithoutExtension(filename);
+
             using(var stream =new FileStream(filename, FileMode.Open))
             {
                 uploader.Upload(new UploadInformation(filename, stream)
                                     {
-                                        PublicId = filename
+                                        PublicId = publicId
                                     });
             }
             Console.WriteLine("Successfully uploaded file");
 
-            uploader.Destroy(filename);
+            uploader.Destroy(publicId);
 
             if(Debugger.IsAttached)
                 Console.ReadLine();

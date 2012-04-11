@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -45,6 +46,7 @@
     <Compile Include="Parameters\FileParameter.cs" />
     <Compile Include="Parameters\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\UploadResult.cs" />
     <Compile Include="Transformation.cs" />
     <Compile Include="Uploader.cs" />
     <Compile Include="UploadInformation.cs" />

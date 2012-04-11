@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Script.Serialization;
 using Cloudinary.Parameters;
+using Cloudinary.Results;
 
 namespace Cloudinary
 {
@@ -30,6 +32,10 @@ namespace Cloudinary
             
             // create request
             string answer = ExecuteRequest("upload", parameterList);
+
+            var serializer = new JavaScriptSerializer();
+            var result = serializer.Deserialize<UploadResult>(answer);
+
             Console.WriteLine(answer);
         }
 
