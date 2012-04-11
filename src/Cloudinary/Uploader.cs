@@ -13,6 +13,8 @@ namespace Cloudinary
 {
     public class Uploader
     {
+        private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer();
+
         public AccountConfiguration Configuration { get; private set; }
 
         public Uploader(AccountConfiguration configuration)
@@ -20,7 +22,7 @@ namespace Cloudinary
             Configuration = configuration;
         }
 
-        public void Upload(UploadInformation upload)
+        public UploadResult Upload(UploadInformation upload)
         {
             var parameterList = new List<Parameter>();
 
@@ -30,16 +32,11 @@ namespace Cloudinary
             Sign(parameterList);
             parameterList.Add(new FileParameter("file", upload.Filename, upload.InputStream));
             
-            // create request
-            string answer = ExecuteRequest("upload", parameterList);
-
-            var serializer = new JavaScriptSerializer();
-            var result = serializer.Deserialize<UploadResult>(answer);
-
-            Console.WriteLine(answer);
+            var result = ExecuteRequest<UploadResult>("upload", parameterList);
+            return result;
         }
 
-        public void Destroy(string publicId)
+        public DestroyResult Destroy(string publicId)
         {
             var parameters = new List<Parameter>
                                  {
@@ -47,8 +44,14 @@ namespace Cloudinary
                                  };
             Sign(parameters);
 
-            string answer = ExecuteRequest("destroy", parameters);
-            Console.WriteLine(answer);
+            var result = ExecuteRequest<DestroyResult>("destroy", parameters);
+            return result;
+        }
+
+        internal T ExecuteRequest<T>(string method, IEnumerable<Parameter> parameters)
+        {
+            string output = ExecuteRequest(method, parameters);
+            return Serializer.Deserialize<T>(output);
         }
 
         internal string ExecuteRequest(string method, IEnumerable<Parameter> parameters)
@@ -86,7 +89,7 @@ namespace Cloudinary
             return Convert.ToInt64(timeSinceEpoch.TotalSeconds);
         }
 
-        internal void Sign(List<Parameter> list)
+        private void Sign(List<Parameter> list)
         {
             list.Add(new Parameter("timestamp", UnixTimeInSeconds(DateTime.Now)));
             list.Sort();

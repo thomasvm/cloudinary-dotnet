@@ -14,6 +14,14 @@ namespace Cloudinary
 
         public string PublicId { get; set; }
 
+        public string Tags { get; set; }
+
+        public Transformation Transformation { get; set; }
+
+        public string Format { get; set; }
+
+        public IEnumerable<Transformation> Eager { get; set; }
+
         public UploadInformation(string filename, Stream inputStream)
         {
             Filename = filename;
