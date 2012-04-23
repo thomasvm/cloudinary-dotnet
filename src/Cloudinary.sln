@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudinary", "Cloudinary\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudinary.CommandLine", "Cloudinary.CommandLine\Cloudinary.CommandLine.csproj", "{506867BC-60E2-4C94-B098-83018AEE28C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudinary.MvcTest", "..\example\Cloudinary.MvcTest\Cloudinary.MvcTest.csproj", "{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{506867BC-60E2-4C94-B098-83018AEE28C6}.Release|Mixed Platforms.Build.0 = Release|x86
 		{506867BC-60E2-4C94-B098-83018AEE28C6}.Release|x86.ActiveCfg = Release|x86
 		{506867BC-60E2-4C94-B098-83018AEE28C6}.Release|x86.Build.0 = Release|x86
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BF3D78D2-9D60-4FDE-882A-81B4AB09FE30}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

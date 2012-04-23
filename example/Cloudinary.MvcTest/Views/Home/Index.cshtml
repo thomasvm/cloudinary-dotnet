@@ -1,0 +1,22 @@
+﻿@using Cloudinary
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+    <body>
+        <h1>Examples</h1>
+        <div>
+            <h3>Original</h3>
+            <img src="@Url.CloudinaryImage("sample")" alt="sample"/> 
+
+            <h3>Cropped 140x140</h3>
+            <img src="@Url.CloudinaryImage("sample", new Transformation(140, 140) { Crop = CropMode.Crop })" alt="cropped"/>
+        </div>
+    </body>
+</html>
