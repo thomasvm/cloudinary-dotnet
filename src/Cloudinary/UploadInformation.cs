@@ -9,18 +9,42 @@ namespace Cloudinary
 {
     public class UploadInformation
     {
+        /// <summary>
+        /// Stream of the Image to upload
+        /// </summary>
         public Stream InputStream { get; private set; }
 
+        /// <summary>
+        /// Filename of the image
+        /// </summary>
         public string Filename { get; private set; }
 
+        /// <summary>
+        /// Public Id, if empty a new public id will be generated
+        /// by Cloudinary
+        /// </summary>
         public string PublicId { get; set; }
 
+        /// <summary>
+        /// Comma-separated list of tags to attach to file
+        /// </summary>
         public string Tags { get; set; }
 
+        /// <summary>
+        /// Transformation to apply directly onto uploaded image
+        /// </summary>
         public Transformation Transformation { get; set; }
 
+        /// <summary>
+        /// Format to store the image in
+        /// (jpg, png, gif, bmp, ico)
+        /// </summary>
         public string Format { get; set; }
 
+        /// <summary>
+        /// Transformations to eagerly apply to the images
+        /// at upload time. (Instead of request time)
+        /// </summary>
         public IEnumerable<Transformation> Eager { get; set; }
 
         public UploadInformation(string filename, Stream inputStream)
@@ -51,6 +75,10 @@ namespace Cloudinary
             }
         }
 
+        /// <summary>
+        /// Gets the string to perform the default transformation
+        /// </summary>
+        /// <returns>a string containing the default transformation</returns>
         public string GetTransformationValue()
         {
             return Transformation != null
@@ -58,6 +86,10 @@ namespace Cloudinary
                        : string.Empty;
         }
 
+        /// <summary>
+        /// Combines the eager transformations with a pipe
+        /// </summary>
+        /// <returns>a string containing the eager transformations</returns>
         public string GetEagerTransformationValues()
         {
             if (Eager == null)
