@@ -11,6 +11,7 @@ namespace Cloudinary
         Fit,
         Fill,
         Limit,
-        Crop
+        Crop,
+        Thumb
     }
 }

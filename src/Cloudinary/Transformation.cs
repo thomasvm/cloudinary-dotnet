@@ -13,6 +13,8 @@ namespace Cloudinary
 
         public CropMode? Crop { get; set; }
 
+        public Gravity? Gravity { get; set; }
+
         public string Format { get; set; }
 
         public Transformation(int width, int height)
@@ -37,6 +39,9 @@ namespace Cloudinary
 
             if (Crop.HasValue)
                 cli.AppendFormat(",c_{0}", Crop.Value.ToString().ToLowerInvariant());
+
+            if (Gravity.HasValue)
+                cli.AppendFormat(",g_{0}", Gravity.Value.ToString().ToLowerInvariant());
 
             return cli.ToString();
         }
