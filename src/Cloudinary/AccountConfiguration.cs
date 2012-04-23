@@ -13,11 +13,15 @@ namespace Cloudinary
 
         public string ApiSecret { get; private set; }
 
+        public bool SharedCdn { get; set; }
+
         public AccountConfiguration(string cloudName, string apiKey, string apiSecret)
         {
             CloudName = cloudName;
             ApiKey = apiKey;
             ApiSecret = apiSecret;
+
+            SharedCdn = true;
         }
 
         private static AccountConfiguration _defaultConfiguration;

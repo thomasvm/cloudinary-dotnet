@@ -13,11 +13,21 @@ namespace Cloudinary
 
         public CropMode? Crop { get; set; }
 
+        public string Format { get; set; }
+
         public Transformation(int width, int height)
         {
             Width = width;
             Height = height;
             Crop = null;
+        }
+
+        public string GetFormat()
+        {
+            if (string.IsNullOrEmpty(Format))
+                return "jpg";
+
+            return Format;
         }
 
         public string ToCloudinary()

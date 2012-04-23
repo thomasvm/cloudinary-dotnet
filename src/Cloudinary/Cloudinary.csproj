@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AccountConfiguration.cs" />
     <Compile Include="CropMode.cs" />
+    <Compile Include="Mvc\CloudinaryUrlHelpers.cs" />
     <Compile Include="Parameters\FileParameter.cs" />
     <Compile Include="Parameters\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,9 +54,7 @@
     <Compile Include="Uploader.cs" />
     <Compile Include="UploadInformation.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mvc\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
