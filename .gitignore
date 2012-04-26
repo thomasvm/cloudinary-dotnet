@@ -1,4 +1,5 @@
 App.config
+packages
 
 # Md html files
 *.md.html
