@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AccountConfiguration.cs" />
     <Compile Include="CropMode.cs" />
+    <Compile Include="Gravity.cs" />
     <Compile Include="Mvc\CloudinaryUrlHelpers.cs" />
     <Compile Include="Parameters\FileParameter.cs" />
     <Compile Include="Parameters\Parameter.cs" />
