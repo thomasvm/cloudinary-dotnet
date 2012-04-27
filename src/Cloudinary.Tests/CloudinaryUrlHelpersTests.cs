@@ -37,5 +37,13 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/public.png", url);
         }
+        
+        [Test]
+        public void CloudinaryImage_WithSimpleTransformation()
+        {
+            string url = Url.CloudinaryImage("public", new Transformation(240, 120)).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_120/public.jpg", url);
+        }
     }
 }
