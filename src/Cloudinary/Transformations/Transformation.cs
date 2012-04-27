@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Cloudinary
 {
-    public class Transformation
+    public class Transformation : ITransformation
     {
         public int Width { get; set; }
 
@@ -35,7 +35,7 @@ namespace Cloudinary
         public string ToCloudinary()
         {
             var cli = new StringBuilder();
-            cli.AppendFormat("w_{0},h_{1}", Width, Height);
+            cli.AppendFormat(GetSize());
 
             if (Crop.HasValue)
                 cli.AppendFormat(",c_{0}", Crop.Value.ToString().ToLowerInvariant());
@@ -44,6 +44,11 @@ namespace Cloudinary
                 cli.AppendFormat(",g_{0}", Gravity.Value.ToString().ToLowerInvariant());
 
             return cli.ToString();
+        }
+
+        protected virtual string GetSize()
+        {
+            return string.Format("w_{0},h_{1}", Width, Height);
         }
     }
 }

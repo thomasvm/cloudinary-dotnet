@@ -45,13 +45,15 @@
     <Compile Include="AccountConfiguration.cs" />
     <Compile Include="CropMode.cs" />
     <Compile Include="Gravity.cs" />
+    <Compile Include="ITransformation.cs" />
     <Compile Include="Mvc\CloudinaryUrlHelpers.cs" />
     <Compile Include="Parameters\FileParameter.cs" />
     <Compile Include="Parameters\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformations\RelativeTransformation.cs" />
     <Compile Include="Results\DestroyResult.cs" />
     <Compile Include="Results\UploadResult.cs" />
-    <Compile Include="Transformation.cs" />
+    <Compile Include="Transformations\Transformation.cs" />
     <Compile Include="Uploader.cs" />
     <Compile Include="UploadInformation.cs" />
   </ItemGroup>

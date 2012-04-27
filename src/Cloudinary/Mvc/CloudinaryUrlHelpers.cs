@@ -30,12 +30,12 @@ namespace Cloudinary.Mvc
             return _(string.Format("{0}/{1}.{2}", baseUrl, publicId, format));
         }
 
-        public static MvcHtmlString CloudinaryImage(this UrlHelper url, string publicId, Transformation transformation)
+        public static MvcHtmlString CloudinaryImage(this UrlHelper url, string publicId, ITransformation transformation)
         {
             return CloudinaryImage(url, AccountConfiguration.DefaultConfiguration, publicId, transformation);
         }
 
-        public static MvcHtmlString CloudinaryImage(this UrlHelper url, AccountConfiguration configuration, string publicId, Transformation transformation)
+        public static MvcHtmlString CloudinaryImage(this UrlHelper url, AccountConfiguration configuration, string publicId, ITransformation transformation)
         {
             string baseUrl = GetBaseUrl(configuration) + "/image/upload";
 
