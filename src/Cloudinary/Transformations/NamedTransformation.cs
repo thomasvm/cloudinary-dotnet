@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Cloudinary.Transformations
+namespace Cloudinary
 {
     public class NamedTransformation : Transformation
     {
