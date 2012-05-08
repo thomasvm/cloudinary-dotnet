@@ -21,8 +21,8 @@ namespace Cloudinary
         protected override string GetSize()
         {
             return string.Format("w_{0},h_{1}", 
-                                 Width.ToString(CultureInfo.InvariantCulture),
-                                 Height.ToString(CultureInfo.InvariantCulture));
+                                 RelativeWidth.ToString(CultureInfo.InvariantCulture),
+                                 RelativeHeight.ToString(CultureInfo.InvariantCulture));
         }
     }
 }
