@@ -45,5 +45,27 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_120/public.jpg", url);
         }
+
+        [Test]
+        public void CloudinaryImage_WithRelativeTransformation_InsertsRelativeWidths()
+        {
+            string url = Url.CloudinaryImage("relative", new RelativeTransformation(0.4, 0.6)).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_0.4,h_0.6/relative.jpg", url);
+        }
+        
+        [Test]
+        public void CloudinaryImag_WithFaceDetection()
+        {
+            var transformation = new Transformation(240, 240)
+                                     {
+                                         Gravity = Gravity.Face,
+                                         Crop = CropMode.Crop
+                                     };
+
+            string url = Url.CloudinaryImage("face", transformation).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,c_crop,g_face/face.jpg", url);
+        }
     }
 }
