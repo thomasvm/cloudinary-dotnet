@@ -50,6 +50,7 @@
     <Compile Include="Parameters\FileParameter.cs" />
     <Compile Include="Parameters\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformations\NamedTransformation.cs" />
     <Compile Include="Transformations\RelativeTransformation.cs" />
     <Compile Include="Results\DestroyResult.cs" />
     <Compile Include="Results\UploadResult.cs" />

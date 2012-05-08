@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -16,6 +17,8 @@ namespace Cloudinary
         public Gravity? Gravity { get; set; }
 
         public string Format { get; set; }
+
+        public int? Radius { get; set; }
 
         public Transformation(int width, int height)
         {
@@ -42,6 +45,16 @@ namespace Cloudinary
 
             if (Gravity.HasValue)
                 cli.AppendFormat(",g_{0}", Gravity.Value.ToString().ToLowerInvariant());
+
+            if (Radius.HasValue)
+            {
+                string urlValue = Radius.Value.ToString(CultureInfo.InvariantCulture);
+
+                if (Radius.Value == int.MaxValue)
+                    urlValue = "max";
+                    
+                cli.AppendFormat(",r_{0}", urlValue);
+            }
 
             return cli.ToString();
         }
