@@ -13,7 +13,7 @@ namespace Cloudinary.CommandLine
     {
         static void Main(string[] args)
         {
-            string filename = "octocat.jpg";
+            string filename = string.Empty;
             bool showHelp = false;
 
             var options = new OptionSet()
@@ -23,7 +23,7 @@ namespace Cloudinary.CommandLine
                               };
             options.Parse(args);
 
-            if(showHelp)
+            if(string.IsNullOrEmpty(filename) || showHelp)
             {
                 options.WriteOptionDescriptions(Console.Out);
                 return;
@@ -50,7 +50,6 @@ namespace Cloudinary.CommandLine
                 var uploadResult = uploader.Upload(new UploadInformation(filename, stream)
                                     {
                                         PublicId = publicId,
-                                        Format = "png",
                                         Transformation = new Transformation(120, 120)
                                                              {
                                                                  Crop = CropMode.Scale
