@@ -42,15 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Cloudinary\ITransformation.cs">
-      <Link>ITransformation.cs</Link>
-    </Compile>
-    <Compile Include="..\Cloudinary\Uploader.cs">
-      <Link>Uploader.cs</Link>
-    </Compile>
-    <Compile Include="..\Cloudinary\UploadInformation.cs">
-      <Link>UploadInformation.cs</Link>
-    </Compile>
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +55,12 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cloudinary\Cloudinary.csproj">
+      <Project>{577F0C3F-E356-4521-BC63-F90376485F6C}</Project>
+      <Name>Cloudinary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
