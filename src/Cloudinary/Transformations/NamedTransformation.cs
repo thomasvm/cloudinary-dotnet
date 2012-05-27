@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Cloudinary
 {
+    /// <summary>
+    /// Instead of specifying the size of the image, this transformation
+    /// allows you to use a transformation specified in the admin 
+    /// </summary>
     public class NamedTransformation : Transformation
     {
         public string Name { get; set; }

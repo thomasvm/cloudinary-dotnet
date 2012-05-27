@@ -6,18 +6,40 @@ using System.Text;
 
 namespace Cloudinary
 {
+    /// <summary>
+    /// The default Transformation
+    /// </summary>
     public class Transformation : ITransformation
     {
+        /// <summary>
+        /// Gets of sets the Width of the image
+        /// </summary>
         public int Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Height of the image
+        /// </summary>
         public int Height { get; set; }
 
+        /// <summary>
+        /// Gets of sets Crop mode
+        /// </summary>
         public CropMode? Crop { get; set; }
 
+        /// <summary>
+        /// Gets of sets Gravity of the tranformation
+        /// </summary>
         public Gravity? Gravity { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Format of the image
+        /// </summary>
         public string Format { get; set; }
 
+        /// <summary>
+        /// Gets or sets the border radius, int.MaxValue
+        /// equals a circle
+        /// </summary>
         public int? Radius { get; set; }
 
         public Transformation(int width, int height)

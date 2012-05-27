@@ -6,6 +6,10 @@ using System.Text;
 
 namespace Cloudinary
 {
+    /// <summary>
+    /// Transformation with sizing information specified relatively 
+    /// instead of the usual pixel-based size
+    /// </summary>
     public class RelativeTransformation : Transformation
     {
         public double RelativeWidth { get; private set; }
