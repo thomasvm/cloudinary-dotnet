@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Cloudinary</id>
+    <version>PKG_VERSION</version>
+    <authors>Thomas Van Machelen</authors>
+    <owners>Thomas Van Machelen</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/thomasvm/cloudinary-dotnet</projectUrl>
+    <iconUrl>http://cloudinary.com/favicon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for easy integration with Cloudinary</description>
+    <releaseNotes>PKG_RELEASENOTES</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>Cloudinary MVC Images</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
