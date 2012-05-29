@@ -1,5 +1,6 @@
 App.config
 packages
+*.nupkg
 
 # Md html files
 *.md.html
