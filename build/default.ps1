@@ -6,7 +6,20 @@ $config = New-Object PSObject -property @{ version="0.0.1";releaseNotes="Initial
 
 task default -depends Build
 
-task Build {
+task GenerateAssemblyInfo  {
+    $fullVersion = "$($config.version).$(Get-GitCommitNumber)"
+    $informationalVersion = "$($fullVersion).$(Get-GitCommitHash)"
+
+    Generate-Assembly-Info `
+            -clsCompliant "false" `
+            -product      "Cloudinary" `
+            -copyright    "Copyright © Thomas Van Machelen $((Get-Date).Year)" `
+            -version      "$fullVersion" `
+            -informationalVersion "$informationalVersion" `
+            -file         "..\src\CommonAssemblyInfo.cs" `
+}
+
+task Build -depends GenerateAssemblyInfo {
     Exec { msbuild /p:Configuration=$mode ../src/Cloudinary.sln }
 }
 
@@ -18,7 +31,6 @@ task Test -depends Build {
 task Package {
     # Force release build
     $mode = "Release"
-    Invoke-Task Build
     Invoke-Task Test
 
     # Create pkg
@@ -43,5 +55,71 @@ function SetNuSpecVersionInfo {
         $_ -replace 'PKG_VERSION', $config.version `
            -replace 'PKG_RELEASENOTES', $config.releaseNotes
         } | Set-Content "pkg\Cloudinary.nuspec"
+}
+
+function Get-GitCommitHash
+{
+    $gitLog = git log --oneline -1
+    return $gitLog.Split(' ')[0]
+}
+
+function Get-GitCommitNumber
+{
+    $count = git log --oneline | wc -l
+    return $count.Trim()
+}
+
+function Generate-Assembly-Info
+{
+param(
+    [string]$clsCompliant = "true",
+    [string]$company, 
+    [string]$product, 
+    [string]$copyright, 
+    [string]$version,
+    [string]$informationalVersion,
+    [string]$file = $(throw "file is a required parameter.")
+)
+  $temp = "$file`_temp"
+
+  $asmInfo = "using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+[assembly: CLSCompliantAttribute($clsCompliant)]
+[assembly: ComVisibleAttribute(false)]
+[assembly: AssemblyCompanyAttribute(""$company"")]
+[assembly: AssemblyProductAttribute(""$product"")]
+[assembly: AssemblyCopyrightAttribute(""$copyright"")]
+[assembly: AssemblyVersionAttribute(""$version"")]
+[assembly: AssemblyInformationalVersionAttribute(""$informationalVersion"")]
+[assembly: AssemblyFileVersionAttribute(""$version"")]"
+
+    $dir = [System.IO.Path]::GetDirectoryName($file)
+    if ((Test-Path $dir) -eq $FALSE)
+    {
+        Write-Host "Creating directory $dir"
+        New-Item -type Directory -Name $dir
+    }
+
+    Write-Host "Generating assembly info file: $file"
+    # Only write when changed; by doing so the build isn't triggered each time
+    If (Test-Path $file) {
+        out-file -filePath $temp -encoding UTF8 -inputObject $asmInfo
+
+        $old = Get-Content $file
+        $new = Get-Content $temp
+
+        $result = Compare-Object $old $new
+
+        If ($result -eq $null) {
+            Remove-Item $temp
+        } Else {
+            Move-Item $temp $file -Force
+        }
+    } Else {
+        out-file -filePath $file -encoding UTF8 -inputObject $asmInfo
+    }
 }
 
