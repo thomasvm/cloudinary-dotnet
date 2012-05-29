@@ -9,6 +9,7 @@ task Build {
 }
 
 task Test -depends Build {
-    Exec { .\nunit\nunit-console.exe ..\src\Cloudinary.Tests\bin\$mode\Cloudinary.Tests.dll /framework=4.0 }
+    Exec { .\nunit\nunit-console.exe ..\src\Cloudinary.Tests\bin\$mode\Cloudinary.Tests.dll }
+    Remove-Item TestResult.xml
 }
 
