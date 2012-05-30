@@ -7,7 +7,7 @@
     <owners>Thomas Van Machelen</owners>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
     <projectUrl>https://github.com/thomasvm/cloudinary-dotnet</projectUrl>
-    <iconUrl>http://cloudinary.com/favicon.png</iconUrl>
+    <!--<iconUrl>http://cloudinary.com/favicon.png</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A library for easy integration with Cloudinary</description>
     <releaseNotes>PKG_RELEASENOTES</releaseNotes>

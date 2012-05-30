@@ -2,7 +2,10 @@ properties {
     $mode = "Debug"
 }
 
-$config = New-Object PSObject -property @{ version="0.0.1";releaseNotes="Initial release" }
+$config = New-Object PSObject -property @{ 
+    version="0.0.2";
+    releaseNotes="Initial release" 
+}
 
 task default -depends Build
 
@@ -48,6 +51,10 @@ task Package {
     }
 
     Remove-Item -Recurse pkg
+}
+
+task Push -depends Package {
+    Exec { ..\src\.nuget\nuget.exe push "Cloudinary.$($config.version).nupkg" }
 }
 
 function SetNuSpecVersionInfo {
