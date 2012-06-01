@@ -3,8 +3,13 @@ properties {
 }
 
 $config = New-Object PSObject -property @{ 
-    version="0.0.2";
-    releaseNotes="Initial release" 
+    version="0.0.3";
+    releaseNotes=@"
+Cloudinary api update
+* Add support for Default Image in transformations
+* Add support for Fixed coordinate cropping
+* Add logo to nupkg
+"@
 }
 
 task default -depends Build
