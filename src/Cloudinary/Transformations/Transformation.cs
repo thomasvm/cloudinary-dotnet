@@ -42,6 +42,13 @@ namespace Cloudinary
         /// </summary>
         public int? Radius { get; set; }
 
+        /// <summary>
+        /// Image to use when the current image isn't available. 
+        /// Format to use: publicid.format, 
+        /// for example: avatar.jpg
+        /// </summary>
+        public string DefaultImage { get; set; }
+
         public Transformation(int width, int height)
         {
             Width = width;
@@ -77,6 +84,9 @@ namespace Cloudinary
                     
                 cli.AppendFormat(",r_{0}", urlValue);
             }
+
+            if (!string.IsNullOrEmpty(DefaultImage))
+                cli.AppendFormat(",d_{0}", DefaultImage);
 
             return cli.ToString();
         }

@@ -67,5 +67,18 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,c_crop,g_face/face.jpg", url);
         }
+
+        [Test]
+        public void CloudinaryImage_WithDefaultImageSpecified_AddsDefaultImageToUrl()
+        {
+            var transformation = new Transformation(240, 240)
+                                     {
+                                         DefaultImage = "sample.jpg"
+                                     };
+
+            string url = Url.CloudinaryImage("face", transformation).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,d_sample.jpg/face.jpg", url);
+        }
     }
 }
