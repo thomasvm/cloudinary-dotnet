@@ -49,6 +49,30 @@ namespace Cloudinary
         /// </summary>
         public string DefaultImage { get; set; }
 
+        /// <summary>
+        /// Gets the X for the fixed cropping coordinate, must 
+        /// be set to SetFixedCroppingPosition
+        /// </summary>
+        public uint? X { get; private set; }
+
+        /// <summary>
+        /// Gets the X for the fixed cropping coordinate,
+        /// be set to SetFixedCroppingPosition
+        /// </summary>
+        public uint? Y { get; private set; }
+
+        /// <summary>
+        /// Sets the fixed cropping position, note that
+        /// the x and y values are against the original image
+        /// </summary>
+        /// <param name="x">the x value</param>
+        /// <param name="y">the y value</param>
+        public void SetFixedCroppingPosition(uint x, uint y)
+        {
+            X = x;
+            Y = y;
+        }
+
         public Transformation(int width, int height)
         {
             Width = width;
@@ -68,6 +92,9 @@ namespace Cloudinary
         {
             var cli = new StringBuilder();
             cli.AppendFormat(GetSize());
+
+            if (X.HasValue && Y.HasValue)
+                cli.AppendFormat(",x_{0},y_{1}", X.Value, Y.Value);
 
             if (Crop.HasValue)
                 cli.AppendFormat(",c_{0}", Crop.Value.ToString().ToLowerInvariant());

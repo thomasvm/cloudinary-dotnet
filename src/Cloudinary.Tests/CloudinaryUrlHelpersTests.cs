@@ -80,5 +80,16 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,d_sample.jpg/face.jpg", url);
         }
+
+        [Test]
+        public void CloudinaryImage_WithFixedCroppingPositionSet_AddPosition()
+        {
+            var transformation = new Transformation(240, 240) { Crop = CropMode.Crop };
+            transformation.SetFixedCroppingPosition(350, 510);
+
+            string url = Url.CloudinaryImage("cropme", transformation).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,x_350,y_510,c_crop/cropme.jpg", url);
+        }
     }
 }
