@@ -1,6 +1,11 @@
 ## cloudinary-dotnet
 cloudinary-dotnet is a library to easily integrate [Cloudinary](http://cloudinary.com) into your ASP.net MVC projects. The library allows you to easily upload files to your Cloudinary cloud, and at the same time provides some Url and Html helpers to access your images.
 
+### Installation
+If you're not interested in the source and simply want to add Cloudinary to your project. Then there is a nuget package available, from the Package Manager Console
+
+        Install-Package Cloudinary
+
 ### Uploading images
 For uploading images you can use the `Uploader` class. It takes an `AccountConfiguration` instance (containing your cloud's name, api key and api secret) in the constructor. You can then use the  the `Upload` to upload Images.
 
@@ -64,5 +69,4 @@ This library is far from done, here are some things that are still on the TODO l
 
 * Correct creation of https urls
 * Tests
-* Creating a NuGet package, or creating a script that allows us to quickly generate new NuGet packages 
 * Uploading without reading the entire stream into memory
