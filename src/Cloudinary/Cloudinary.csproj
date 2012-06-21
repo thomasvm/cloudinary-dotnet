@@ -57,6 +57,7 @@
     <Compile Include="Transformations\RelativeTransformation.cs" />
     <Compile Include="Results\DestroyResult.cs" />
     <Compile Include="Results\UploadResult.cs" />
+    <Compile Include="Transformations\TransformationBase.cs" />
     <Compile Include="Transformations\Transformation.cs" />
     <Compile Include="Uploader.cs" />
     <Compile Include="UploadInformation.cs" />
