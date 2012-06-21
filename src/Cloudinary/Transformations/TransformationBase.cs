@@ -33,6 +33,11 @@ namespace Cloudinary.Transformations
         public int? Radius { get; set; }
 
         /// <summary>
+        /// Gets or sets the angle the image should be rotated
+        /// </summary>
+        public Angle Angle { get; set; }
+
+        /// <summary>
         /// Image to use when the current image isn't available. 
         /// Format to use: publicid.format, 
         /// for example: avatar.jpg
@@ -96,6 +101,9 @@ namespace Cloudinary.Transformations
 
             if (!string.IsNullOrEmpty(DefaultImage))
                 cli.AppendFormat(",d_{0}", DefaultImage);
+
+            if (Angle != null)
+                cli.AppendFormat("," + Angle.ToCloudinaryString());
 
             return cli.ToString().Trim(',');
         }
