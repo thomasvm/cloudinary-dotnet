@@ -91,5 +91,25 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,x_350,y_510,c_crop/cropme.jpg", url);
         }
+
+        [Test]
+        public void CloudinaryImage_WithAngle_AddsPosition()
+        {
+            var transformation = new Transformation(240, 240) {Angle = new Angle(45)};
+
+            string url = Url.CloudinaryImage("angled", transformation).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,a_45/angled.jpg", url);
+        }
+        
+        [Test]
+        public void CloudinaryImage_WithAutoAngle_AddsPosition()
+        {
+            var transformation = new Transformation(240, 240) {Angle = Angle.Auto };
+
+            string url = Url.CloudinaryImage("angled", transformation).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,a_auto/angled.jpg", url);
+        }
     }
 }
