@@ -29,7 +29,7 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/public.jpg", url);
         }
-        
+
         [Test]
         public void CloudinaryImage_WithPublicIdAndFormat()
         {
@@ -37,7 +37,7 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/public.png", url);
         }
-        
+
         [Test]
         public void CloudinaryImage_WithSimpleTransformation()
         {
@@ -53,7 +53,7 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_0.4,h_0.6/relative.jpg", url);
         }
-        
+
         [Test]
         public void CloudinaryImag_WithFaceDetection()
         {
@@ -84,7 +84,7 @@ namespace Cloudinary.Tests
         [Test]
         public void CloudinaryImage_WithFixedCroppingPositionSet_AddPosition()
         {
-            var transformation = new Transformation(240, 240) { Crop = CropMode.Crop };
+            var transformation = new Transformation(240, 240) {Crop = CropMode.Crop};
             transformation.SetFixedCroppingPosition(350, 510);
 
             string url = Url.CloudinaryImage("cropme", transformation).ToString();
@@ -101,11 +101,11 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,a_45/angled.jpg", url);
         }
-        
+
         [Test]
         public void CloudinaryImage_WithAutoAngle_AddsPosition()
         {
-            var transformation = new Transformation(240, 240) {Angle = Angle.Auto };
+            var transformation = new Transformation(240, 240) {Angle = Angle.Auto};
 
             string url = Url.CloudinaryImage("angled", transformation).ToString();
 
@@ -120,6 +120,26 @@ namespace Cloudinary.Tests
 
             string url = Url.CloudinaryImage("effected", transformation).ToString();
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_30,h_90,e_sepia/effected.jpg", url);
+        }
+
+        [Test]
+        public void CloudinaryImage_WithChainedTransformation_Chains()
+        {
+            var first = new Transformation(35, 99)
+                            {
+                                Radius = 4,
+                                Format = "png"
+                            };
+            var second = new TransformationBase()
+                             {
+                                 Angle = new Angle(45)
+                             };
+
+            var chained = new ChainedTransformation(first, second);
+
+            string url = Url.CloudinaryImage("chained", chained).ToString();
+
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_35,h_99,r_4/a_45/chained.png", url);
         }
     }
 }
