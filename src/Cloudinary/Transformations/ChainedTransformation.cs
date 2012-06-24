@@ -22,6 +22,9 @@ namespace Cloudinary
 
         public void Add(ITransformation transformation)
         {
+            if(transformation == null)
+                throw new ArgumentNullException("transformation");
+
             _transformations.Add(transformation);
         }
 

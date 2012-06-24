@@ -15,7 +15,14 @@ namespace Cloudinary.Transformations
             if(second == null)
                 throw new ArgumentNullException("second");
 
+            // check if first is chained
             ChainedTransformation chained = first as ChainedTransformation;
+
+            // no? try second argument
+            if(chained == null)
+            {
+                chained = second as ChainedTransformation;
+            }
 
             if(chained != null)
             {

@@ -51,6 +51,7 @@
     <Compile Include="ChainedTransformationTests.cs" />
     <Compile Include="CloudinaryUrlHelpersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransformationExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
