@@ -111,5 +111,15 @@ namespace Cloudinary.Tests
 
             Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_240,h_240,a_auto/angled.jpg", url);
         }
+
+        [Test]
+        public void CloudinaryImage_WithEffect_AddsEffect()
+        {
+            var transformation = new Transformation(30, 90);
+            transformation.Effect = "sepia";
+
+            string url = Url.CloudinaryImage("effected", transformation).ToString();
+            Assert.AreEqual("http://res.cloudinary.com/test/image/upload/w_30,h_90,e_sepia/effected.jpg", url);
+        }
     }
 }

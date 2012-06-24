@@ -38,6 +38,11 @@ namespace Cloudinary.Transformations
         public Angle Angle { get; set; }
 
         /// <summary>
+        /// apply an effect to the image
+        /// </summary>
+        public string Effect { get; set; }
+
+        /// <summary>
         /// Image to use when the current image isn't available. 
         /// Format to use: publicid.format, 
         /// for example: avatar.jpg
@@ -104,6 +109,9 @@ namespace Cloudinary.Transformations
 
             if (Angle != null)
                 cli.AppendFormat("," + Angle.ToCloudinaryString());
+
+            if (!string.IsNullOrEmpty(Effect))
+                cli.AppendFormat(",e_{0}", Effect);
 
             return cli.ToString().Trim(',');
         }
