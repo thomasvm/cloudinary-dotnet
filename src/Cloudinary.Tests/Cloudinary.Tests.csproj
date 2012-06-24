@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AngleTests.cs" />
+    <Compile Include="ChainedTransformationTests.cs" />
     <Compile Include="CloudinaryUrlHelpersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
