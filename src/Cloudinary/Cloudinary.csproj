@@ -55,7 +55,7 @@
     <Compile Include="Parameters\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transformations\ChainedTransformation.cs" />
-    <Compile Include="Transformations\ITransformationExtensions.cs" />
+    <Compile Include="Transformations\TransformationExtensions.cs" />
     <Compile Include="Transformations\NamedTransformation.cs" />
     <Compile Include="Transformations\RelativeTransformation.cs" />
     <Compile Include="Results\DestroyResult.cs" />

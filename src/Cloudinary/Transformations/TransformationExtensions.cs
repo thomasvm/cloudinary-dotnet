@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Cloudinary.Transformations
 {
-    public static class ITransformationExtensions
+    public static class TransformationExtensions
     {
         public static ITransformation Chain(this ITransformation first, ITransformation second)
         {
