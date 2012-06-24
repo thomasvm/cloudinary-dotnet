@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Cloudinary.Transformations
+namespace Cloudinary
 {
     /// <summary>
     /// 
