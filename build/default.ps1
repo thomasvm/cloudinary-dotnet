@@ -3,12 +3,12 @@ properties {
 }
 
 $config = New-Object PSObject -property @{ 
-    version="0.0.3";
+    version="0.0.4";
     releaseNotes=@"
 Cloudinary api update
-* Add support for Default Image in transformations
-* Add support for Fixed coordinate cropping
-* Add logo to nupkg
+* Add support for effect parameter
+* Add support for angle parameter
+* Add support for chained transformations
 "@
 }
 
