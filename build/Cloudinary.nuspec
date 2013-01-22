@@ -9,7 +9,10 @@
     <projectUrl>https://github.com/thomasvm/cloudinary-dotnet</projectUrl>
     <iconUrl>https://raw.github.com/thomasvm/cloudinary-dotnet/master/build/cloudinary_logo.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A library for easy integration with Cloudinary</description>
+    <description>
+        A community-created library for easy integration with Cloudinary. 
+        Note that there also is an official Cloudinary package called CloudinaryDotNet
+    </description>
     <releaseNotes>PKG_RELEASENOTES</releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Cloudinary MVC Images</tags>

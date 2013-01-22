@@ -3,13 +3,8 @@ properties {
 }
 
 $config = New-Object PSObject -property @{ 
-    version="0.0.4";
-    releaseNotes=@"
-Cloudinary api update
-* Add support for effect parameter
-* Add support for angle parameter
-* Add support for chained transformations
-"@
+    version="0.0.5";
+    releaseNotes=@"Update to mention that there now is an official CloudinaryDotNet package"@
 }
 
 task default -depends Build
