@@ -4,7 +4,9 @@ properties {
 
 $config = New-Object PSObject -property @{ 
     version="0.0.5";
-    releaseNotes=@"Update to mention that there now is an official CloudinaryDotNet package"@
+    releaseNotes=@"
+No new features, simply pointing out that there now is an official Cloudinary package: CloudinaryDotNet
+"@
 }
 
 task default -depends Build
